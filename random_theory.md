@@ -20,3 +20,5 @@ what are tools: the ability we are giving the LLM that can be making an API call
 
 Langchain and LangGraph gives us pre-built react agents
 
+Tavily basically ek web search tool that is integrated with langchain so that you can let your agent perform websearches in easy manner, 
+TavilyClient hai or noraml TavilySearch base class hai jiske aap objects banasakte of any parameter like max_searches, include_domains wagaira

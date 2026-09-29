@@ -21,3 +21,7 @@ A langchain chain is a work flow that connects multiple components in langchain 
 
 Langchain Expression Language (LCEL): in this lcel syntax we create a chain by composing two components
 '|' Pipe Operator in an expression language is going to create a new runnable chain by connecting the output of the left component as an input to the right
+
+Langchain.agents ke zariye we can create agents (llms that can use tool) , an agent can be defined as a software system that uses LLM for its reasoning to perform a certain task using tools 
+
+create agent se agent banaliye, tools list me tools specify karidye like seach, you can create new tool functions using the @tool decorator, fir agent object create karliye then invoking it and printing response - pretty cool huh

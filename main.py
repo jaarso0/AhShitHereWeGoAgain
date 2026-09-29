@@ -1,14 +1,25 @@
+from typing import List
+
+from pydantic import BaseModel, Field 
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_core.messages import HumanMessage
-
+from tavily import TavilyClient
+from langchain_tavily import TavilySearch
 load_dotenv()
+
+# tavily = TavilyClient()
+
+# class Source(BaseModel):
+
 
 def main():
     print("Hello from langu!")
+    result  = agent.invoke({"messages": [ HumanMessage(content="search for 3 job postings for an ai engineer using langchain in hyderabad and list their details")]})
+    print(result)
 #     information = """Ibn Rushd[a] (14 April 1126 – 11 December 1198), Latinized as Averroes,[b] was an Andalusian polymath and jurist who was proficient in a variety of intellectual fields, including philosophy, theology, medicine, astronomy, physics, psychology, mathematics, neurology, Islamic jurisprudence, law, and linguistics. The author of more than 100 books and treatises,[1][2] his philosophical works include numerous commentaries on Aristotle, for which he was known in the Western world as "The Commentator" and "Father of Rationalism".
 
 # Averroes was a strong proponent of Aristotelianism; he attempted to restore what he considered the original teachings of Aristotle and opposed the Neoplatonist tendencies of earlier Muslim thinkers, such as al-Farabi and Avicenna. He also defended the pursuit of philosophy against criticism by Ash'ari theologians such as Al-Ghazali. Averroes argued that philosophy was permissible in Islam and even compulsory among certain elites. He also argued scriptural text should be interpreted allegorically if it appeared to contradict conclusions reached by reason and philosophy. In Islamic jurisprudence, he wrote the Bidāyat al-Mujtahid on the differences between Islamic schools of law and the principles that caused their differences. In medicine, he proposed a new theory of stroke, described the signs and symptoms of Parkinson's disease for the first time, and might have been the first to identify the retina as the part of the eye responsible for sensing light. His medical book Al-Kulliyat fi al-Tibb, translated into Latin and known as the Colliget, became a textbook in Europe for centuries"""
@@ -30,10 +41,23 @@ def main():
 #     response = chain.invoke(input={"information": information})
 #     print(response.content)
 
+# @tool
+# def TavilySearch(query: str) -> str:
+#     """
+#     Tool that searches over the internet
+#     Args:
+#         query : The query is to search for
+#     Returns: 
+#         The search result
+#     """
+#     print(f"Searching for: {query}")
+#     return tavily.search(query=query)
 
-def search(query: str) -> str:
-    print(f"Searching for: {query}")
-    return "Tokyo weather in sunny"
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+tools = [TavilySearch(max_results=3, include_domains=["linkedin.com"])]
+agent = create_agent(model=llm, tools=tools)
+
+
 
 
 if __name__ == "__main__":
